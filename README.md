@@ -4,7 +4,7 @@ Cyber security repo tracking my journey
 
 The files in this repository were used to configure the network depicted below.
 
-!Images/Project_Vnet.png
+![Project_Vnet.png](Images/Project_Vnet.png)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the Yaml file may be used to install only certain pieces of it, such as Filebeat.
 
@@ -74,7 +74,7 @@ _ ...Increase virtual memory so the Elk server can run
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output] Images/Docker ps.png
+![Docker_ps.png](Images/Docker_ps.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -101,20 +101,34 @@ How do I specify which machine to install the ELK server on versus which to inst
 - _Which URL do you navigate to in order to check that the ELK server is running? http://[your.VM.IP]:5601/app/kibana.
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
-command to download the elk playbook. {ansible-playbook install-elk.yml}
-command to check elk container up and running. {ssh user@elkvmIP} then run {docker ps} you should see container is up and running. Then you will go to Azure and set up access rules. 
-navigate to  http://[your.VM.IP]:5601/app/kibana. to check that ELK is up and running
-Installation of filebeat. 
-ssh into jump box. 
-command to start ansible container docker start (container name)
-command to attach to container. docker attach (container name)
-command to download filebeat. curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/filebeat-config.yml
+
+command to download the elk playbook. `ansible-playbook install-elk.yml`
+
+command to check elk container up and running. `ssh user@elkvmIP` then run `docker ps` you should see container is up and running. Then you will go to Azure and set up access rules. 
+navigate to  http://[your.VM.IP]:5601/app/kibana. to check that ELK is up and running 
+Now you need to install filebeat on your VMs
+
+ssh into jump box.
+
+command to start ansible container `docker start (container name)`
+
+command to attach to container. `docker attach (container name)`
+
+Go to ELK server GUI and begin process to install Filebeat.
+
+command to download filebeat. `curl https://gist.githubusercontent.com/slape/5cc350109583af6cbe577bbcc0710c93/raw/eca603b72586fbe148c11f9c87bf96a63cb25760/Filebeat > /etc/ansible/filebeat-config.yml`
+
 Edit the Config file. Scroll to line #1106 and replace the IP address with the IP address of your ELK machine. 
+
 Scroll to line #1806 and replace the IP address with the IP address of your ELK machine.
-command to create filebeat playbook. nano filebeat-playbook.yml
+
+command to create filebeat playbook. `nano filebeat-playbook.yml`
+
 move file to /etc/ansible/roles/
+
 after finished creating playbook save and run to install filebeat.
-command to install filebeat {ansible-play filebeat-playbook.yml}
+command to install filebeat `ansible-play filebeat-playbook.yml`
+
 check installation was success by navigating to Filebeat installation page on elk server.
-on the bottom of page click check data button. the button should turn green. 
+on the bottom of page click check data button. the button should turn green, filebeat is now ready for use. 
 you can install Metricbeat following the same commands just using metricbeat files. 
